@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	default-lazy-init="true">
+
+	<description>Spring公共配置</description>
+
+	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<context:component-scan base-package="org.bond.dubbo.provider">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<!-- <import resource="spring-jdbc.xml"/> -->
+
+
+	<!-- <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"> -->
+	<!-- <property name="sessionFactory" ref="sessionFactory"/> -->
+	<!-- </bean> -->
+
+	<!-- <tx:advice id="coreTxAdvice" transaction-manager="transactionManager"> -->
+	<!-- <tx:attributes> -->
+	<!-- <tx:method name="get*" read-only="true"/> -->
+	<!-- <tx:method name="list*" read-only="true"/> -->
+	<!-- <tx:method name="find*" read-only="true"/> -->
+	<!-- <tx:method name="search*" read-only="true"/> -->
+	<!-- <tx:method name="*" propagation="REQUIRED" rollback-for="Throwable" -->
+	<!-- no-rollback-for="org.bond.dubbo.common.exception.InventoryAllocateException,com.alibaba.dubbo.rpc.RpcException,org.bond.dubbo.common.exception.NoRollbackException"/> -->
+	<!-- </tx:attributes> -->
+	<!-- </tx:advice> -->
+
+	<!-- <bean id="timeSurround" class="org.bond.dubbo.core.advice.CoreSurroundTimeAdvice"/> -->
+	<!-- 分库切面 -->
+	<!-- <bean id="coreBeforeCommitAdvice" class="org.bond.dubbo.core.advice.CoreBeforeTxCommitAdvice"/> -->
+	<!-- <aop:config proxy-target-class="true"> -->
+	<!-- <aop:pointcut id="pointcut" expression="execution( * org.bond.dubbo..*Service*.*(..))"/> -->
+
+	<!-- <aop:advisor advice-ref="coreBeforeAdvice" pointcut-ref="pointcut"/> -->
+	<!-- <aop:advisor advice-ref="coreTxAdvice" pointcut-ref="pointcut"/> -->
+	<!-- <aop:advisor advice-ref="coreBeforeCommitAdvice" pointcut-ref="pointcut"/> -->
+	<!-- <aop:advisor advice-ref="timeSurround" pointcut-ref="pointcut" /> -->
+	<!-- </aop:config> -->
+
+	<import resource="applicationProvider.xml" />
+
+
+</beans>

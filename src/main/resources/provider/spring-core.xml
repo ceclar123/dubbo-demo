@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="true">
+	<description>Spring配置</description>
+
+	<!-- develop环境 -->
+	<beans profile="develop">
+		<context:property-placeholder
+			location="classpath*:/properties/core-develop.properties" />
+		<import resource="detail.xml" />
+	</beans>
+	<!-- test环境 -->
+	<beans profile="test">
+		<context:property-placeholder
+			location="classpath*:/properties/core-test.properties" />
+		<import resource="detail.xml" />
+	</beans>
+	<!-- production环境 -->
+	<beans profile="production">
+		<context:property-placeholder
+			location="classpath*:/properties/core-production.properties" />
+		<import resource="detail.xml" />
+	</beans>
+
+
+</beans>
